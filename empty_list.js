@@ -1,4 +1,4 @@
-// Small check for empty div, might be removed later, when it is no more used for developing.
+// empty_list.js
 // When the DOM is ready, check #bip39-list. If it has no <li> children,
 // write "Empty_list" into the controls div (if present) or insert a message.
 
