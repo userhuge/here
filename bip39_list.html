@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIP39 Screwable List Viewer</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; }
+    .container { max-width: 600px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    h1 { text-align: center; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 8px 16px; margin-bottom: 4px; cursor: pointer; border-radius: 4px; transition: background 0.2s; }
+    li:hover { background: #e0e7ff; }
+    li.selected { background: #6366f1; color: #fff; }
+    .word { font-weight: bold; }
+    .bits { font-family: monospace; color: #555; margin-left: 8px; }
+    .symbols { margin-left: 8px; color: #888; transition: color 120ms ease, opacity 120ms ease; }
+    /* Improve contrast for symbols when a line is selected */
+    li.selected .symbols {
+      color: rgba(255,255,255,0.97);
+      font-weight: 600;
+      opacity: 1;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.12);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BIP39 screwing guide/list</h1>
+    <ul id="bip39-list">
+    <div style="text-align:center; margin-bottom:16px;">
+      <label><input type="checkbox" id="toggle-word" checked> Word</label>
+      <label style="margin-left:12px;"><input type="checkbox" id="toggle-bits" checked> Bits</label>
+      <label style="margin-left:12px;"><input type="checkbox" id="toggle-symbols" checked> Symbols</label>
+    </div class="words">
+      <li><span class="word">abandon</span> <span class="bits">00000000000</span> <span class="symbols">◯◯◯◯◯◯◯◯◯◯◯</span></li>
+      <li><span class="word">ability</span> <span class="bits">00000000001</span> <span class="symbols">◯◯◯◯◯◯◯◯◯◯⊕</span></li>
+      <li><span class="word">able</span> <span class="bits">00000000010</span> <span class="symbols">◯◯◯◯◯◯◯◯◯⊕◯</span></li>
+      <li><span class="word">about</span> <span class="bits">00000000011</span> <span class="symbols">◯◯◯◯◯◯◯◯◯⊕⊕</span></li>
+      <li><span class="word">above</span> <span class="bits">00000000100</span> <span class="symbols">◯◯◯◯◯◯◯◯⊕◯◯</span></li>
+      <li><span class="word">absent</span> <span class="bits">00000000101</span> <span class="symbols">◯◯◯◯◯◯◯◯⊕◯⊕</span></li>
+      <li><span class="word">absorb</span> <span class="bits">00000000110</span> <span class="symbols">◯◯◯◯◯◯◯◯⊕⊕◯</span></li>
+    </ul>
+  </div>
+  <script>
+    const list = document.getElementById('bip39-list');
+    list.addEventListener('click', function(e) {
+      let li = e.target;
+      while (li && li.tagName !== 'LI') li = li.parentElement;
+      if (!li) return;
+      Array.from(list.children).forEach(item => item.classList.remove('selected'));
+      li.classList.add('selected');
+    });
+      function setColumnVisibility() {
+        const showWord = document.getElementById('toggle-word').checked;
+        const showBits = document.getElementById('toggle-bits').checked;
+        const showSymbols = document.getElementById('toggle-symbols').checked;
+        list.querySelectorAll('li').forEach(li => {
+          li.querySelector('.word').style.display = showWord ? '' : 'none';
+          li.querySelector('.bits').style.display = showBits ? '' : 'none';
+          li.querySelector('.symbols').style.display = showSymbols ? '' : 'none';
+        });
+      }
+      document.getElementById('toggle-word').addEventListener('change', setColumnVisibility);
+      document.getElementById('toggle-bits').addEventListener('change', setColumnVisibility);
+      document.getElementById('toggle-symbols').addEventListener('change', setColumnVisibility);
+      setColumnVisibility();
+  </script>
+  <script src="empty_list.js"></script>
+</body>
+</html>
