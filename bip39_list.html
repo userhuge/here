@@ -43,9 +43,88 @@
       background: transparent;
       pointer-events: none;
     }
+    .sidebar-alphabet {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 36px;
+      background: #f3f4f6;
+      border-right: 1px solid #e5e7eb;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      box-shadow: 1px 0 4px rgba(0,0,0,0.04);
+    }
+    .sidebar-alphabet ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar-alphabet li {
+      margin: 0;
+    }
+    .sidebar-alphabet a {
+      display: block;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      color: #6366f1;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 50%;
+      transition: background 0.15s, color 0.15s;
+      font-size: 1em;
+      user-select: none;
+    }
+    .sidebar-alphabet a:hover {
+      background: #6366f1;
+      color: #fff;
+    }
+    @media print {
+      .sidebar-alphabet { display: none !important; }
+    }
   </style>
 </head>
 <body>
+  <div class="sidebar-alphabet">
+    <ul>
+      <li><a href="#" data-letter="A">A</a></li>
+      <li><a href="#" data-letter="B">B</a></li>
+      <li><a href="#" data-letter="C">C</a></li>
+      <li><a href="#" data-letter="D">D</a></li>
+      <li><a href="#" data-letter="E">E</a></li>
+      <li><a href="#" data-letter="F">F</a></li>
+      <li><a href="#" data-letter="G">G</a></li>
+      <li><a href="#" data-letter="H">H</a></li>
+      <li><a href="#" data-letter="I">I</a></li>
+      <li><a href="#" data-letter="J">J</a></li>
+      <li><a href="#" data-letter="K">K</a></li>
+      <li><a href="#" data-letter="L">L</a></li>
+      <li><a href="#" data-letter="M">M</a></li>
+      <li><a href="#" data-letter="N">N</a></li>
+      <li><a href="#" data-letter="O">O</a></li>
+      <li><a href="#" data-letter="P">P</a></li>
+      <li><a href="#" data-letter="Q">Q</a></li>
+      <li><a href="#" data-letter="R">R</a></li>
+      <li><a href="#" data-letter="S">S</a></li>
+      <li><a href="#" data-letter="T">T</a></li>
+      <li><a href="#" data-letter="U">U</a></li>
+      <li><a href="#" data-letter="V">V</a></li>
+      <li><a href="#" data-letter="W">W</a></li>
+      <li><a href="#" data-letter="X">X</a></li>
+      <li><a href="#" data-letter="Y">Y</a></li>
+      <li><a href="#" data-letter="Z">Z</a></li>
+    </ul>
+  </div>
   <div class="container">
     <h1>BIP39 screwing guide/list</h1>
     <div style="text-align:center; margin-bottom:16px;">
@@ -2134,5 +2213,26 @@
       setColumnVisibility();
   </script>
   <script src="empty_list.js"></script>
+<script>
+// Sidebar alphabet navigation
+if (document.querySelector('.sidebar-alphabet')) {
+  document.querySelectorAll('.sidebar-alphabet a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var letter = link.getAttribute('data-letter');
+      var list = document.getElementById('bip39-list');
+      if (!list) return;
+      var items = Array.from(list.querySelectorAll('li'));
+      var target = items.find(function(li) {
+        var wordSpan = li.querySelector('.word');
+        return wordSpan && wordSpan.textContent.trim().toUpperCase().startsWith(letter);
+      });
+      if (target) {
+        target.scrollIntoView({behavior: 'smooth', block: 'center'});
+      }
+    });
+  });
+}
+</script>
 </body>
 </html>
