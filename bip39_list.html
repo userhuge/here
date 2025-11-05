@@ -9,6 +9,9 @@
     .container { max-width: 600px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
     h1 { text-align: center; }
     ul { list-style: none; padding: 0; }
+    #bip39-list {
+      margin-left: 60px;
+    }
     li { padding: 8px 16px; margin-bottom: 4px; cursor: pointer; border-radius: 4px; transition: background 0.2s; }
     li:hover { background: #e0e7ff; }
     li.selected { background: #6366f1; color: #fff; }
@@ -93,9 +96,22 @@
     @media print {
       .sidebar-alphabet { display: none !important; }
     }
+    @media (max-width: 600px) {
+      #bip39-list li {
+        overflow-x: auto;
+        white-space: nowrap;
+        display: block;
+        -webkit-overflow-scrolling: touch;
+      }
+      .word, .bits, .symbols {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="container">
   <div class="sidebar-alphabet">
     <ul>
       <li><a href="#" data-letter="A">A</a></li>
@@ -126,8 +142,7 @@
       <li><a href="#" data-letter="Z">Z</a></li>
     </ul>
   </div>
-  <div class="container">
-    <h1>BIP39 screwing guide/list</h1>
+  <h1>BIP39 screwing guide/list</h1>
     <div style="text-align:center; margin-bottom:16px;">
       <label><input type="checkbox" id="toggle-word" checked> Word</label>
       <label style="margin-left:12px;"><input type="checkbox" id="toggle-bits" checked> Bits</label>
