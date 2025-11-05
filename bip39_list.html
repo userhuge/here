@@ -48,41 +48,42 @@
       left: 0;
       top: 0;
       height: 100vh;
-      width: 36px;
+      width: 56px;
       background: #f3f4f6;
       border-right: 1px solid #e5e7eb;
       z-index: 100;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
       padding: 12px 0;
       box-shadow: 1px 0 4px rgba(0,0,0,0.04);
+      overflow-y: auto;
     }
     .sidebar-alphabet ul {
       list-style: none;
       padding: 0;
       margin: 0;
-      height: 100%;
+      width: 100%;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      /* Remove justify-content: space-between for natural stacking */
     }
     .sidebar-alphabet li {
       margin: 0;
     }
     .sidebar-alphabet a {
       display: block;
-      width: 28px;
-      height: 28px;
-      line-height: 28px;
+      width: 44px;
+      height: 44px;
+      line-height: 44px;
       text-align: center;
       color: #6366f1;
       font-weight: bold;
       text-decoration: none;
       border-radius: 50%;
       transition: background 0.15s, color 0.15s;
-      font-size: 1em;
+      font-size: 1.15em;
       user-select: none;
     }
     .sidebar-alphabet a:hover {
